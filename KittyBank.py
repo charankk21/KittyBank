@@ -101,8 +101,6 @@ customerProfile1 = ['107','Charan',29,'Hyd','M']
 
 customerProfile.add(customerProfile1)
 
-def customerPassbook():
-    print('printing customerPassbook')
-    
+
 
 

@@ -84,13 +84,10 @@ def addNewCustomer():
     newCustomerId = max(customerProfile.Custid)+1
     customerProfile.loc[max(customerProfile.index)+1] = [newCustomerId,customerName,int(age),city,Gender]
 
- 
-inititalizeTransaction_df()
-initalizeCustomers_df()
-addNewCustomer()
-
-
-acceptDeposit()
+def customerPassbook():
+    print('printing customerPassbook')
+    txDetails =transactions.loc[transactions.Custid == 105]
+    print(txDetails.iloc[:,1:].to_string(index=False))
 
 def withdrawMoney():
     print('withdrawMoney')
@@ -102,10 +99,9 @@ def withdrawMoney():
     if(previousbalance >= amount):
         transactions.loc[max(transactions.index)+1] = [customerId,txno,'14/11/2018',1,amount,previousbalance-amount]
         
-withdrawMoney()
-
-def customerPassbook():
-    print('printing customerPassbook')
-    transactions.loc[transactions.Custid == 105, index=False]
-    
+inititalizeTransaction_df()
+initalizeCustomers_df()
+addNewCustomer()
+acceptDeposit()   
+withdrawMoney()    
 customerPassbook()
