@@ -18,8 +18,7 @@ def inititalizeTransaction_df():
          'Date':['13/11/2018','13/11/2018','13/10/2018','10/11/2018','01/11/2018'],
          'Txn_type':[0,1,0,1,0],
          'Amount':[100000,10000,15000,5000,25000],
-         'Balance':[100000,10000,15000,5000,25000]
-    
+         'Balance':[100000,10000,15000,5000,25000]    
         }   
     transactions=pd.DataFrame(data=dict2)
     
@@ -61,10 +60,52 @@ def acceptDeposit():
 
 def addNewCustomer():
     print('Adding new customers')
-    customerName = input('Please provide customer Name :')
-    age = int(input('Please provide your age: '))
-    Gender = input('Please provide your gender: ')
-    city = input('Please provide your city: ')    
+    #Get Customer Name
+    customerName = input('Please provide customer Name  :')    
+    while(customerName.isalpha() == False):
+        print('Please provide Valid Customer Name')
+        customerName = input('Please provide customer Name :')
+    #Get Age
+    age = input('Please provide your age: ')
+    while(age.isdigit() == False):
+        print('Please provide Valid Age')
+        age = input('Please provide your age: ')                
+    #Get Gender
+    Gender = input('Please provide your gender as M for Male or F for Female: ')
+    while((Gender == 'M' or Gender == 'F') == False):
+        print('Gender can take M for Male or F for Female, Please provide Valid Gender')
+        Gender = input('Please provide your gender as M for Male or F for Female: ')
+    city = input('Please provide your city: ')
+    #Get City
+    while(city.isalpha() == False):
+        print('Please provide Valid City Name')
+        city = input('Please provide your city: ')
+    #Generate New customer Id
     newCustomerId = max(customerProfile.Custid)+1
-    customerProfile.loc[max(customerProfile.index)+1] = [newCustomerId,customerName,age,city,Gender]
+    customerProfile.loc[max(customerProfile.index)+1] = [newCustomerId,customerName,int(age),city,Gender]
+
+ 
+inititalizeTransaction_df()
+initalizeCustomers_df()
+addNewCustomer()
+
+
+acceptDeposit()
+
+def withdrawMoney():
+    print('withdrawMoney')
+    customerId = int(input('please enter  your customerId :'))
+    amount =int(input('please enter  your amount to withdraw :'))    
+    txno = max(transactions.Transactionno)+1
+    previousbalance = transactions.loc[(transactions.Custid == customerId) & (transactions.Txn_type == 0),'Amount'].sum() - transactions.loc[(transactions.Custid == customerId) & (transactions.Txn_type == 1),'Amount'].sum()
     
+    if(previousbalance >= amount):
+        transactions.loc[max(transactions.index)+1] = [customerId,txno,'14/11/2018',1,amount,previousbalance-amount]
+        
+withdrawMoney()
+
+def customerPassbook():
+    print('printing customerPassbook')
+    transactions.loc[transactions.Custid == 105, index=False]
+    
+customerPassbook()
