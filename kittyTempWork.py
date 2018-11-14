@@ -63,8 +63,8 @@ def addNewCustomer():
     print('Adding new customers')
     customerName = input('Please provide customer Name :')
     age = int(input('Please provide your age: '))
-    Gender = input('Please provide your gender')
-    city = input('Please provide your city')
-    
+    Gender = input('Please provide your gender: ')
+    city = input('Please provide your city: ')    
     newCustomerId = max(customerProfile.Custid)+1
+    customerProfile.loc[max(customerProfile.index)+1] = [newCustomerId,txno,'14/11/2018',0,amount,previousbalance+amount]
     
