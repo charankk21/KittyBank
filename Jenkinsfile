@@ -1,6 +1,6 @@
 pipeline{
    
-    agent {label 'linagent'}
+    agent {label 'linagent2'}
 	options {
     skipDefaultCheckout()
   }
